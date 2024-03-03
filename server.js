@@ -6,10 +6,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 // Added dep
-const Bookmark = require('./models/bookmark');
-const User = require('./models/user');
-const bookmarkController = require('./controllers/bookmarks');
-const userController = require('./controllers/Users');
+const Bookmark = require('./models/bookmarkModel');
+const User = require('./models/userModel');
+const bookmarkController = require('./controllers/BookmarksCtrl');
+const userController = require('./controllers/UsersCtrl');
 const PORT = process.env.PORT;
 
 // Sample data
@@ -22,8 +22,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-// app.use('/bookmark', bookmarkController);
-// app.use('/user', userController);
+app.use('/bookmark', bookmarkController);
+app.use('/user', userController);
 
 // Default Route
 app.get('/', (req, res) => {
