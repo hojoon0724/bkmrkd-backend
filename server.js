@@ -21,6 +21,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+// Router
 app.use('/dashboard', authCheck, bookmarkController);
 app.use('/user', userController);
 
