@@ -3,11 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 
 // Added dep
-const Bookmark = require('./models/bookmarkModel');
-const User = require('./models/userModel');
+const authCheck = require('./authCheck');
 const bookmarkController = require('./controllers/BookmarksCtrl');
 const userController = require('./controllers/UsersCtrl');
 const PORT = process.env.PORT;
@@ -22,7 +20,8 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-app.use('/bookmark', bookmarkController);
+
+app.use('/dashboard', authCheck, bookmarkController);
 app.use('/user', userController);
 
 // Default Route

@@ -4,11 +4,20 @@ const Bookmark = require('../models/bookmarkModel');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  res.send(`bookmark collection GET route response`);
+  try {
+    const bookmarks = await Bookmark.find({ userId: req.userId });
+    res.json(bookmarks);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
 });
 
 router.post('/', async (req, res) => {
-  res.send(`bookmark collection POST route response`);
+  try {
+    req.body.username = req.username;
+  } catch (error) {
+    res.json(error);
+  }
 });
 
 router.get('/:id', async (req, res) => {
