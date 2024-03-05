@@ -6,8 +6,8 @@ const cors = require('cors');
 
 // Added dep
 const authCheck = require('./authCheck');
-const bookmarkController = require('./controllers/BookmarksCtrl');
-const userController = require('./controllers/UsersCtrl');
+const bookmarksController = require('./controllers/BookmarksCtrl');
+const usersController = require('./controllers/UsersCtrl');
 const PORT = process.env.PORT;
 
 // Sample data
@@ -22,8 +22,8 @@ app.use(cors());
 app.use(express.json());
 
 // Router
-app.use('/dashboard', authCheck, bookmarkController);
-app.use('/user', userController);
+app.use('/dashboard', authCheck, bookmarksController);
+app.use('/user', usersController);
 
 // Default Route
 app.get('/', (req, res) => {
