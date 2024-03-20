@@ -5,7 +5,9 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const bookmarks = await Bookmark.find({ userId: req.userId });
+    const bookmarks = await Bookmark.find({
+      userId: req.userId
+    });
     res.json(bookmarks);
   } catch (error) {
     res.status(400).json({ error });
@@ -13,6 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
     req.body.userId = req.userId;
     res.json(await Bookmark.create(req.body));
@@ -40,7 +43,9 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+  console.log(`delete route log`);
   try {
+    console.log(req.params.id);
     res.json(await Bookmark.findByIdAndDelete(req.params.id));
   } catch (error) {
     res.status(400).json(error);
